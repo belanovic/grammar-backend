@@ -22,14 +22,10 @@ app.post('/chatGPT', async (req, res) => {
     const prompt = req.body.prompt;
     const description = req.body.description;
     
-    console.log('evo me')
-    console.log(prompt)
-    console.log(description)
-
     let answer = await callChatGPT(text, prompt, description);
     
     console.log(answer);
-    console.log(typeof answer);
+
     res.json(answer);
 })
 
