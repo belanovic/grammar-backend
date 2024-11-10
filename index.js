@@ -23,10 +23,14 @@ app.post('/chatGPT', async (req, res) => {
     const description = req.body.description;
     
     let answer = await callChatGPT(text, prompt, description);
+
+    strippedAnswer = extractArrayFromString(answer);
+
     
     console.log(answer);
+    console.log(strippedAnswer);
 
-    res.json(answer);
+    res.json(strippedAnswer);
 })
 
 async function callChatGPT(text, prompt, description) {
@@ -45,7 +49,7 @@ async function callChatGPT(text, prompt, description) {
             { role: 'user', content: prompt + text}
           ],
           temperature: 0.2,
-          max_tokens: 150,
+          max_tokens: 1200,
           top_p: 1
 
         })
@@ -65,3 +69,14 @@ async function callChatGPT(text, prompt, description) {
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, async() => console.log(`Server is listening on port ${PORT}`));
+
+
+function extractArrayFromString(inputString) {
+  const match = inputString.match(/\[.*\]/s);
+  
+  if (match) {
+      return match[0]; // Return the matched string (array)
+  } else {
+      return null; // Return null if no array is found
+  }
+}
