@@ -50,6 +50,23 @@ app.post('/chatGPT/facts', async (req, res) => {
   res.json(strippedAnswer);
 })
 
+app.post('/chatGPT/comments', async (req, res) => {
+
+  const text = req.body.text;
+  const prompt = req.body.prompt;
+  const description = req.body.description;
+  
+  console.log(text);
+  let answer = await callChatGPT(text, prompt, description);
+
+  strippedAnswer = extractArrayFromString(answer);
+
+  console.log(answer);
+  console.log(strippedAnswer);
+
+  res.json(strippedAnswer);
+})
+
 app.post('/chatGPT/article', async (req, res) => {
 
   const text = req.body.text;
