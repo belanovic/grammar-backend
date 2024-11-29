@@ -116,7 +116,7 @@ async function callChatGPT(text, prompt, description) {
             { role: 'user', content: prompt + text}
           ],
           temperature: 0.2,
-          max_tokens: 2200,
+          max_tokens: 3200,
           top_p: 1
 
         })
